@@ -1,0 +1,24 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="SkillBridge.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>SkillBridge</title>
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="header">
+        <span class="skill">Skill</span><span class="bridge">Bridge</span>
+    </div>
+
+    <div class="main">
+        <form id="form1" runat="server">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </form>
+    </div>
+</body>
+</html>

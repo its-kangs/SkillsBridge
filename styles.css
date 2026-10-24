@@ -1,0 +1,28 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+.header {
+    padding: 29px 40px;
+    border-bottom: 1px solid #e5e9ef;
+    font-size: 34px;
+}
+
+.skill {
+    color: #203253;
+    font-weight: bold;
+}
+
+.bridge {
+    color: #568fcb;
+    font-weight: normal;
+}
+
+.main {
+    width: 100%;
+    min-height: 80vh;
+    background-color: white;
+}
