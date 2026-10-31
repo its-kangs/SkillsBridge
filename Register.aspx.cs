@@ -67,6 +67,13 @@ namespace SkillBridge
                     //display success message
                     Lblregister.Text = "Account created! You can now login.";
                     Lblregister.ForeColor = System.Drawing.Color.Green;
+
+                    // Clear the textboxes after successful registration
+                    Txbfullname.Text = "";  
+                    Txbemail.Text = "";
+                    Txbpassword.Text = "";
+                    Txbbio.Text = "";
+                    Ddlrole.SelectedIndex = 0;
                 }
             }
         }
