@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI.WebControls;
@@ -8,7 +7,9 @@ namespace SkillBridge
 {
     public partial class TutorProfile : System.Web.UI.Page
     {
-        //Gets the tutor ID from the URL
+        SqlCommand cmd;
+
+        // GETS THE TUTOR ID FROM THE URL
         private int TeacherId
         {
             get
@@ -30,7 +31,7 @@ namespace SkillBridge
             }
         }
 
-        //Checks whether all reviews should be displayed
+        // CHECKS WHETHER ALL REVIEWS SHOULD BE DISPLAYED
         private bool ShowAllReviews
         {
             get
@@ -56,34 +57,31 @@ namespace SkillBridge
             }
         }
 
-        //Loads the tutor's information
+        // LOADS THE TUTOR'S INFORMATION
         private void LoadTutorProfile()
         {
-            string connString = ConfigurationManager.ConnectionStrings["SkillBridgeDB"].ConnectionString;
+            string query = "SELECT U.Name, U.Bio, " +
+                           "ISNULL((SELECT AVG(CAST(R.Rating AS FLOAT)) " +
+                           "FROM Reviews R " +
+                           "INNER JOIN SessionRequests SR ON R.RequestID = SR.RequestID " +
+                           "WHERE SR.TeacherID = U.UserID), 0) AS AvgRating, " +
+                           "(SELECT COUNT(*) " +
+                           "FROM Reviews R " +
+                           "INNER JOIN SessionRequests SR ON R.RequestID = SR.RequestID " +
+                           "WHERE SR.TeacherID = U.UserID) AS TotalReviews " +
+                           "FROM Users U " +
+                           "WHERE U.UserID = " + TeacherId;
 
-            string query = @"
-                SELECT U.Name, U.Bio,
-                ISNULL((
-                    SELECT AVG(CAST(R.Rating AS FLOAT))
-                    FROM Reviews R
-                    INNER JOIN SessionRequests SR ON R.RequestID = SR.RequestID
-                    WHERE SR.TeacherID = U.UserID
-                ), 0) AS AvgRating,
-                (
-                    SELECT COUNT(*)
-                    FROM Reviews R
-                    INNER JOIN SessionRequests SR ON R.RequestID = SR.RequestID
-                    WHERE SR.TeacherID = U.UserID
-                ) AS TotalReviews
-                FROM Users U
-                WHERE U.UserID = @TeacherID";
+            // Create database connection
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\g\source\repos\SkillBridge\App_Data\SkilledBridge.mdf;Integrated Security=True");
 
-            SqlConnection con = new SqlConnection(connString);
-            SqlCommand cmd = new SqlCommand(query, con);
-
-            cmd.Parameters.AddWithValue("@TeacherID", TeacherId);
-
+            // Open database connection
             con.Open();
+
+            // Associate SQL statement with command object
+            cmd = new SqlCommand(query, con);
+
+            // Execute SQL statement
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.Read())
@@ -111,37 +109,44 @@ namespace SkillBridge
                 btnSendRequest.Enabled = false;
             }
 
+            // Close reader and connection
             reader.Close();
             con.Close();
         }
 
-        //Loads the tutor's skills
+        // LOADS THE TUTOR'S SKILLS
         private void LoadTutorSkills()
         {
-            string connString = ConfigurationManager.ConnectionStrings["SkillBridgeDB"].ConnectionString;
-
-            string query = @"
-                SELECT S.SkillID, S.SkillName
-                FROM UserSkills US
-                INNER JOIN Skills S ON US.SkillID = S.SkillID
-                WHERE US.UserID = @TeacherID
-                ORDER BY S.SkillName ASC";
+            string query = "SELECT S.SkillID, S.SkillName " +
+                           "FROM UserSkills US " +
+                           "INNER JOIN Skills S ON US.SkillID = S.SkillID " +
+                           "WHERE US.UserID = " + TeacherId + " " +
+                           "ORDER BY S.SkillName ASC";
 
             DataTable dt = new DataTable();
 
-            SqlConnection con = new SqlConnection(connString);
-            SqlCommand cmd = new SqlCommand(query, con);
+            // Create database connection
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\g\source\repos\SkillBridge\App_Data\SkilledBridge.mdf;Integrated Security=True");
 
-            cmd.Parameters.AddWithValue("@TeacherID", TeacherId);
+            // Open database connection
+            con.Open();
 
+            // Associate SQL statement with command object
+            cmd = new SqlCommand(query, con);
+
+            // Execute SQL statement
             SqlDataAdapter da = new SqlDataAdapter(cmd);
+
             da.Fill(dt);
 
-            //Display skills on the profile
+            // Close connection
+            con.Close();
+
+            // Display skills on the profile
             rptSkills.DataSource = dt;
             rptSkills.DataBind();
 
-            //Add skills to the dropdown list
+            // Add skills to the dropdown list
             ddlSkills.DataSource = dt;
             ddlSkills.DataTextField = "SkillName";
             ddlSkills.DataValueField = "SkillID";
@@ -154,27 +159,28 @@ namespace SkillBridge
             }
         }
 
-        //Loads the tutor's reviews
+        // LOADS THE TUTOR'S REVIEWS
         private void LoadTutorReviews()
         {
-            string connString = ConfigurationManager.ConnectionStrings["SkillBridgeDB"].ConnectionString;
+            // Count total reviews
+            string countQuery = "SELECT COUNT(*) " +
+                                "FROM Reviews R " +
+                                "INNER JOIN SessionRequests SR ON R.RequestID = SR.RequestID " +
+                                "WHERE SR.TeacherID = " + TeacherId;
 
-            string countQuery = @"
-                SELECT COUNT(*)
-                FROM Reviews R
-                INNER JOIN SessionRequests SR ON R.RequestID = SR.RequestID
-                WHERE SR.TeacherID = @TeacherID";
+            // Create database connection
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\g\source\repos\SkillBridge\App_Data\SkilledBridge.mdf;Integrated Security=True");
 
-            SqlConnection con = new SqlConnection(connString);
-            SqlCommand countCmd = new SqlCommand(countQuery, con);
-
-            countCmd.Parameters.AddWithValue("@TeacherID", TeacherId);
-
+            // Open database connection
             con.Open();
 
-            int totalReviews = Convert.ToInt32(countCmd.ExecuteScalar());
+            // Associate SQL statement with command object
+            cmd = new SqlCommand(countQuery, con);
 
-            //Display only two reviews unless Show All is clicked
+            // Execute SQL statement
+            int totalReviews = Convert.ToInt32(cmd.ExecuteScalar());
+
+            // Display only two reviews unless Show All is clicked
             string top = "";
 
             if (ShowAllReviews == false)
@@ -182,27 +188,28 @@ namespace SkillBridge
                 top = "TOP 2";
             }
 
-            string query = @"
-                SELECT " + top + @"
-                    U.Name AS ReviewerName,
-                    R.Rating,
-                    R.Comment
-                FROM Reviews R
-                INNER JOIN SessionRequests SR ON R.RequestID = SR.RequestID
-                INNER JOIN Users U ON R.ReviewerID = U.UserID
-                WHERE SR.TeacherID = @TeacherID
-                ORDER BY R.ReviewDate DESC, R.ReviewID DESC";
+            string query = "SELECT " + top + " " +
+                           "U.Name AS ReviewerName, R.Rating, R.Comment " +
+                           "FROM Reviews R " +
+                           "INNER JOIN SessionRequests SR ON R.RequestID = SR.RequestID " +
+                           "INNER JOIN Users U ON R.ReviewerID = U.UserID " +
+                           "WHERE SR.TeacherID = " + TeacherId + " " +
+                           "ORDER BY R.ReviewDate DESC, R.ReviewID DESC";
 
-            SqlCommand cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@TeacherID", TeacherId);
+            // Associate SQL statement with command object
+            cmd = new SqlCommand(query, con);
 
+            // Execute SQL statement
             DataTable dt = new DataTable();
+
             SqlDataAdapter da = new SqlDataAdapter(cmd);
+
             da.Fill(dt);
 
+            // Close connection
             con.Close();
 
-            //Display reviews
+            // Display reviews
             rptReviews.DataSource = dt;
             rptReviews.DataBind();
 
@@ -221,7 +228,7 @@ namespace SkillBridge
             }
         }
 
-        //Converts a rating into stars
+        // CONVERTS A RATING INTO STARS
         protected string FormatStars(object ratingObj)
         {
             int rating = Convert.ToInt32(ratingObj);
@@ -247,14 +254,14 @@ namespace SkillBridge
             return stars;
         }
 
-        //Displays all reviews
+        // DISPLAYS ALL REVIEWS
         protected void lnkShowMoreReviews_Click(object sender, EventArgs e)
         {
             ShowAllReviews = true;
             LoadTutorReviews();
         }
 
-        //Takes the student to the session request page
+        // TAKES THE STUDENT TO THE SESSION REQUEST PAGE
         protected void btnSendRequest_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(ddlSkills.SelectedValue))

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
@@ -9,6 +8,8 @@ namespace SkillBridge
 {
     public partial class Register : System.Web.UI.Page
     {
+        SqlCommand cmd; //can be accessed by all events in this page
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -16,7 +17,7 @@ namespace SkillBridge
 
         protected void Btncreateaccount_Click(object sender, EventArgs e)
         {
-            //check that a role was chosen (validators cannot check the dropdown)
+            //check that a role was chosen
             if (Ddlrole.SelectedIndex == 0)
             {
                 Lblregister.Text = "Please select if you are a Student or a Tutor";
@@ -31,45 +32,57 @@ namespace SkillBridge
             }
             else
             {
-                //declare program variables
-                string connString, email, hashed;
-                connString = ConfigurationManager.ConnectionStrings["SkillBridgeDB"].ConnectionString;
-                email = Txbemail.Text.Trim();
-                hashed = HashPassword(Txbpassword.Text);
+                //declare local variables
+                string email = Txbemail.Text.Trim();
+                string hashed = HashPassword(Txbpassword.Text);
+                string name = Txbfullname.Text.Trim();
+                string role = Ddlrole.SelectedItem.Text;
+                string bio = Txbbio.Text.Trim();
 
-                SqlConnection con = new SqlConnection(connString);
+                //Create a new instance of SqlConnection
+                SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\g\source\repos\SkillBridge\App_Data\SkilledBridge.mdf;Integrated Security=True");
+
+                //Open db connection
                 con.Open();
 
                 //check if the email is already used
-                SqlCommand check = new SqlCommand("SELECT COUNT(*) FROM Users WHERE Email = @Email", con);
-                check.Parameters.AddWithValue("@Email", email);
-                int count = Convert.ToInt32(check.ExecuteScalar());
+                string checkEmail = "SELECT COUNT(*) FROM Users WHERE Email = '" + email + "'";
+
+                //associate SQL statement with command object
+                cmd = new SqlCommand(checkEmail, con);
+
+                //execute SQL statement
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
 
                 if (count > 0)
                 {
                     con.Close();
+
                     Lblregister.Text = "That email is already registered";
                     Lblregister.ForeColor = System.Drawing.Color.Red;
+
                     return;
                 }
                 else
                 {
-                    //save the new user
-                    SqlCommand cmd = new SqlCommand("INSERT INTO Users (Name, Email, PasswordHash, Role, Bio, date_joined) VALUES (@Name, @Email, @Hash, @Role, @Bio, GETDATE())", con);
-                    cmd.Parameters.AddWithValue("@Name", Txbfullname.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Email", email);
-                    cmd.Parameters.AddWithValue("@Hash", hashed);
-                    cmd.Parameters.AddWithValue("@Role", Ddlrole.SelectedItem.Text);
-                    cmd.Parameters.AddWithValue("@Bio", Txbbio.Text.Trim());
+                    //Declare SQL statement to save the new user
+                    string sql = "INSERT INTO Users (Name, Email, PasswordHash, Role, Bio, date_joined) VALUES ('" + name + "','" + email + "','" + hashed + "','" + role + "','" + bio + "', GETDATE())";
+
+                    //associate SQL statement with command object
+                    cmd = new SqlCommand(sql, con);
+
+                    //execute SQL statement
                     cmd.ExecuteNonQuery();
+
+                    //Close database connection
                     con.Close();
 
                     //display success message
                     Lblregister.Text = "Account created! You can now login.";
                     Lblregister.ForeColor = System.Drawing.Color.Green;
 
-                    // Clear the textboxes after successful registration
-                    Txbfullname.Text = "";  
+                    //Clear the textboxes after successful registration
+                    Txbfullname.Text = "";
                     Txbemail.Text = "";
                     Txbpassword.Text = "";
                     Txbbio.Text = "";
@@ -82,12 +95,16 @@ namespace SkillBridge
         private string HashPassword(string password)
         {
             SHA256 sha = SHA256.Create();
+
             byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
+
             string result = "";
+
             foreach (byte b in bytes)
             {
                 result = result + b.ToString("x2");
             }
+
             return result;
         }
     }

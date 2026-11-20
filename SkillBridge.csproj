@@ -67,6 +67,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\SkilledBridge.mdf" />
+    <Content Include="App_Data\SkilledBridge_log.ldf">
+      <DependentUpon>SkilledBridge.mdf</DependentUpon>
+    </Content>
     <Content Include="Register.aspx" />
     <Content Include="Session_Request.aspx" />
     <Content Include="styles.css" />
