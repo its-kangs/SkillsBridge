@@ -32,10 +32,10 @@ namespace SkillBridge
             else
             {
                 //declare program variables
-                string connString, email, hashed;
+                string connString, email;
                 connString = ConfigurationManager.ConnectionStrings["SkillBridgeDB"].ConnectionString;
                 email = Txbemail.Text.Trim();
-                hashed = HashPassword(Txbpassword.Text);
+
 
                 SqlConnection con = new SqlConnection(connString);
                 con.Open();
@@ -58,7 +58,7 @@ namespace SkillBridge
                     SqlCommand cmd = new SqlCommand("INSERT INTO Users (Name, Email, PasswordHash, Role, Bio, date_joined) VALUES (@Name, @Email, @Hash, @Role, @Bio, GETDATE())", con);
                     cmd.Parameters.AddWithValue("@Name", Txbfullname.Text.Trim());
                     cmd.Parameters.AddWithValue("@Email", email);
-                    cmd.Parameters.AddWithValue("@Hash", hashed);
+                    cmd.Parameters.AddWithValue("@Hash", Txbpassword.Text);
                     cmd.Parameters.AddWithValue("@Role", Ddlrole.SelectedItem.Text);
                     cmd.Parameters.AddWithValue("@Bio", Txbbio.Text.Trim());
                     cmd.ExecuteNonQuery();
@@ -71,17 +71,6 @@ namespace SkillBridge
             }
         }
 
-        //turns the password into a SHA256 code (same method used in Login)
-        private string HashPassword(string password)
-        {
-            SHA256 sha = SHA256.Create();
-            byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
-            string result = "";
-            foreach (byte b in bytes)
-            {
-                result = result + b.ToString("x2");
-            }
-            return result;
-        }
+
     }
 }

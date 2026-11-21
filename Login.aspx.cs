@@ -32,23 +32,24 @@ namespace SkillBridge
             else
             {
                 //declare program variables
-                string connString, email, hashed;
+                string connString, email;
                 connString = ConfigurationManager.ConnectionStrings["SkillBridgeDB"].ConnectionString;
                 email = Txbemail.Text.Trim();
-                hashed = HashPassword(Txbpassword.Text);
+
 
                 //connect to the database
                 SqlConnection con = new SqlConnection(connString);
                 SqlCommand cmd = new SqlCommand("SELECT UserID, Name, Role FROM Users WHERE Email = @Email AND PasswordHash = @Hash", con);
                 cmd.Parameters.AddWithValue("@Email", email);
-                cmd.Parameters.AddWithValue("@Hash", hashed);
+                cmd.Parameters.AddWithValue("@Hash", Txbpassword.Text);
+
 
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 if (reader.Read())
                 {
-                   
+
                     Session["UserID"] = reader["UserID"].ToString();
                     Session["UserName"] = reader["Name"].ToString();
                     Session["Role"] = reader["Role"].ToString();
@@ -67,17 +68,8 @@ namespace SkillBridge
             }
         }
 
-        
-        private string HashPassword(string password)
-        {
-            SHA256 sha = SHA256.Create();
-            byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
-            string result = "";
-            foreach (byte b in bytes)
-            {
-                result = result + b.ToString("x2");
-            }
-            return result;
-        }
+
+
+
     }
 }
