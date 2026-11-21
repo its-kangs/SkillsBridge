@@ -67,10 +67,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\SkilledBridge.mdf" />
+    <Content Include="App_Data\SkilledBridge_log.ldf">
+      <DependentUpon>SkilledBridge.mdf</DependentUpon>
+    </Content>
     <Content Include="AdminReports.aspx" />
     <Content Include="My_sessions.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="Session_Request.aspx" />
     <Content Include="styles.css" />
+    <Content Include="Tutor_List.aspx" />
+    <Content Include="Tutor_Profile.aspx" />
     <Content Include="Web.config" />
     <Content Include="Login.aspx" />
   </ItemGroup>
@@ -97,6 +104,13 @@
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Session_Request.aspx.cs">
+      <DependentUpon>Session_Request.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Session_Request.aspx.designer.cs">
+      <DependentUpon>Session_Request.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -110,6 +124,20 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutor_List.aspx.cs">
+      <DependentUpon>Tutor_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutor_List.aspx.designer.cs">
+      <DependentUpon>Tutor_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutor_Profile.aspx.cs">
+      <DependentUpon>Tutor_Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutor_Profile.aspx.designer.cs">
+      <DependentUpon>Tutor_Profile.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

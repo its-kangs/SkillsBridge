@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.UI;
+using System.Data.SqlClient;
 
 namespace SkillBridge
 {
     public partial class Login : System.Web.UI.Page
     {
+        SqlCommand cmd; //can be accessed by all events in this page
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -45,6 +46,11 @@ namespace SkillBridge
 
 
                 con.Open();
+
+                //Associate SQL statement with command object
+                cmd = new SqlCommand(sql, con);
+
+                //Execute SQL statement
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 if (reader.Read())
@@ -53,7 +59,10 @@ namespace SkillBridge
                     Session["UserID"] = reader["UserID"].ToString();
                     Session["UserName"] = reader["Name"].ToString();
                     Session["Role"] = reader["Role"].ToString();
+
                     reader.Close();
+
+                    //Close database connection
                     con.Close();
                     Response.Redirect("~/Tutor_List.aspx");
                 }
@@ -61,6 +70,7 @@ namespace SkillBridge
                 {
                     reader.Close();
                     con.Close();
+
                     Lbllogin.Text = "Invalid Login Credentials";
                     Lbllogin.ForeColor = System.Drawing.Color.Red;
                     return;

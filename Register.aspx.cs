@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
@@ -9,6 +8,8 @@ namespace SkillBridge
 {
     public partial class Register : System.Web.UI.Page
     {
+        SqlCommand cmd; //can be accessed by all events in this page
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -16,7 +17,7 @@ namespace SkillBridge
 
         protected void Btncreateaccount_Click(object sender, EventArgs e)
         {
-            //check that a role was chosen (validators cannot check the dropdown)
+            //check that a role was chosen
             if (Ddlrole.SelectedIndex == 0)
             {
                 Lblregister.Text = "Please select if you are a Student or a Tutor";
@@ -41,15 +42,21 @@ namespace SkillBridge
                 con.Open();
 
                 //check if the email is already used
-                SqlCommand check = new SqlCommand("SELECT COUNT(*) FROM Users WHERE Email = @Email", con);
-                check.Parameters.AddWithValue("@Email", email);
-                int count = Convert.ToInt32(check.ExecuteScalar());
+                string checkEmail = "SELECT COUNT(*) FROM Users WHERE Email = '" + email + "'";
+
+                //associate SQL statement with command object
+                cmd = new SqlCommand(checkEmail, con);
+
+                //execute SQL statement
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
 
                 if (count > 0)
                 {
                     con.Close();
+
                     Lblregister.Text = "That email is already registered";
                     Lblregister.ForeColor = System.Drawing.Color.Red;
+
                     return;
                 }
                 else
@@ -62,11 +69,20 @@ namespace SkillBridge
                     cmd.Parameters.AddWithValue("@Role", Ddlrole.SelectedItem.Text);
                     cmd.Parameters.AddWithValue("@Bio", Txbbio.Text.Trim());
                     cmd.ExecuteNonQuery();
+
+                    //Close database connection
                     con.Close();
 
                     //display success message
                     Lblregister.Text = "Account created! You can now login.";
                     Lblregister.ForeColor = System.Drawing.Color.Green;
+
+                    //Clear the textboxes after successful registration
+                    Txbfullname.Text = "";
+                    Txbemail.Text = "";
+                    Txbpassword.Text = "";
+                    Txbbio.Text = "";
+                    Ddlrole.SelectedIndex = 0;
                 }
             }
         }
