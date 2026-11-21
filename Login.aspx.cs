@@ -48,13 +48,13 @@ namespace SkillBridge
 
                 if (reader.Read())
                 {
-                    //save the user details in session then go to dashboard
+                   
                     Session["UserID"] = reader["UserID"].ToString();
                     Session["UserName"] = reader["Name"].ToString();
                     Session["Role"] = reader["Role"].ToString();
                     reader.Close();
                     con.Close();
-                    Response.Redirect("~/Dashboard.aspx");
+                    Response.Redirect("~/Tutor_List.aspx");
                 }
                 else
                 {
@@ -62,12 +62,12 @@ namespace SkillBridge
                     con.Close();
                     Lbllogin.Text = "Invalid Login Credentials";
                     Lbllogin.ForeColor = System.Drawing.Color.Red;
-                    return;//Halts the login operation
+                    return;
                 }
             }
         }
 
-        //turns the password into a SHA256 code (same method used in Register)
+        
         private string HashPassword(string password)
         {
             SHA256 sha = SHA256.Create();

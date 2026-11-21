@@ -105,3 +105,622 @@ textarea.auth-input {
     color: #777;
     margin-top: 20px;
 }
+
+
+/* SESSION REQUEST PAGE */
+
+.session-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.session-card {
+    width: 560px;
+    max-width: 100%;
+}
+
+.session-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.session-sub {
+    font-size: 15px;
+    color: #888;
+    margin: 8px 0 25px 0;
+}
+
+.session-row {
+    display: flex;
+    gap: 14px;
+}
+
+.session-field {
+    flex: 1;
+    margin-bottom: 24px;
+    min-width: 0;
+}
+
+    .session-field label {
+        display: block;
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 7px;
+    }
+
+.session-input {
+    width: 100%;
+    height: 52px;
+    padding: 0 15px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #dde3ea;
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #333;
+}
+
+.session-message {
+    height: 120px;
+    padding: 13px 15px;
+    resize: vertical;
+}
+
+.session-buttons {
+    display: flex;
+    gap: 13px;
+    margin-top: 28px;
+}
+
+.session-cancel,
+.session-submit {
+    width: 50%;
+    height: 61px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.session-cancel {
+    background: white;
+    border: 1px solid #203253;
+    color: #203253;
+}
+
+.session-submit {
+    background: #203253;
+    border: none;
+    color: white;
+}
+
+    .session-submit:hover {
+        background: #2d4a75;
+    }
+
+.session-cancel:hover {
+    background: #f3f5f8;
+}
+
+.session-footer {
+    text-align: center;
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 24px;
+}
+
+.session-error {
+    display: block;
+    color: #b00020;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.session-success {
+    display: block;
+    color: #218838;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+    .session-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .session-buttons {
+        flex-direction: column;
+    }
+
+    .session-cancel,
+    .session-submit {
+        width: 100%;
+    }
+}
+/* =========================================
+   TUTOR PROFILE PAGE STYLES
+   ========================================= */
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-link {
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-item {
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+}
+
+    .nav-item:hover {
+        color: #568fcb;
+    }
+
+.nav-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #d6e3f0;
+    cursor: pointer;
+}
+
+/* Two-Column Page Layout */
+.profile-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 40px 32px 60px 32px;
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.profile-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-right {
+    width: 340px;
+    flex-shrink: 0;
+}
+
+/* Tutor Top Hero Section */
+.tutor-hero {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.tutor-avatar {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    background-color: #d6e3f0;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.tutor-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tutor-name {
+    margin: 0 0 6px 0;
+    font-size: 28px;
+    font-weight: bold;
+    color: #1a1a1a;
+}
+
+.tutor-rating {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.stars-gray {
+    color: #777;
+    letter-spacing: 1px;
+    margin-right: 4px;
+}
+
+/* Skill Pill Tags */
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-pill {
+    display: inline-block;
+    padding: 7px 16px;
+    font-size: 14px;
+    color: #3b5978;
+    background-color: #f4f7fb;
+    border: 1px solid #d6e2ef;
+    border-radius: 20px;
+}
+
+/* Shared Cards (About, Reviews, Request Sidebar) */
+.profile-card {
+    background-color: #ffffff;
+    border: 1px solid #e1e6ed;
+    border-radius: 10px;
+    padding: 24px 26px;
+    margin-bottom: 22px;
+}
+
+.card-heading {
+    margin: 0 0 14px 0;
+    font-size: 17px;
+    font-weight: bold;
+    color: #1a1a1a;
+}
+
+.card-body-text {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: #555;
+}
+
+/* Reviews List */
+.review-item {
+    padding: 14px 0;
+    border-bottom: 1px solid #eef1f5;
+}
+
+    .review-item:first-of-type {
+        padding-top: 4px;
+    }
+
+.review-header {
+    font-size: 14px;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+}
+
+.review-stars {
+    color: #222;
+    letter-spacing: 1px;
+}
+
+.review-comment {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.more-reviews {
+    padding-top: 14px;
+}
+
+.more-reviews-link {
+    font-size: 14px;
+    color: #888;
+    text-decoration: none;
+}
+
+    .more-reviews-link:hover {
+        color: #203253;
+        text-decoration: underline;
+    }
+
+/* Right Sidebar Request Card */
+.request-card .card-heading {
+    margin-bottom: 8px;
+}
+
+.request-sub {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.profile-select {
+    width: 100%;
+    height: 46px;
+    padding: 0 14px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #dde3ea;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.profile-submit-btn {
+    width: 100%;
+    height: 48px;
+    margin-top: 16px;
+    background-color: #203253;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+    .profile-submit-btn:hover {
+        background-color: #2d4a75;
+    }
+
+/* Footer */
+.profile-footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #e5e9ef;
+    font-size: 13px;
+    color: #999;
+}
+
+/* Responsive Breakpoint */
+@media (max-width: 820px) {
+    .profile-container {
+        flex-direction: column;
+    }
+
+    .profile-right {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .profile-header {
+        padding: 20px;
+    }
+
+    .nav-links {
+        gap: 16px;
+    }
+
+    .tutor-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    /* ---- My Sessions  ---- */
+    .ms-wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px;
+    }
+
+    .ms-title {
+        font-size: 22px;
+        font-weight: bold;
+        color: #1a1a1a;
+        margin-bottom: 14px;
+    }
+
+    .ms-filter {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .ms-filter-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #777;
+    }
+
+    .ms-select {
+        height: 38px;
+        min-width: 180px;
+        padding: 0 12px;
+        font-size: 13px;
+        background-color: white;
+        border: 1px solid #dde3ea;
+        border-radius: 4px;
+    }
+
+    .ms-scroll {
+        overflow-x: auto;
+    }
+
+    .ms-grid {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+    }
+
+        .ms-grid th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: #999;
+            border-bottom: 1px solid #dde3ea;
+            padding: 8px 6px;
+        }
+
+        .ms-grid td {
+            padding: 12px 6px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+    .ms-skill {
+        font-weight: bold;
+        color: #1a1a1a;
+    }
+
+    .ms-partner {
+        color: #777;
+        font-size: 12px;
+        margin-top: 2px;
+    }
+
+    .ms-status {
+        display: inline-block;
+        border-radius: 12px;
+        font-size: 11px;
+        padding: 3px 10px;
+        text-transform: uppercase;
+    }
+
+    .ms-pending {
+        background-color: #fdf3dc;
+        color: #b8860b;
+        border: 1px solid #f0dba0;
+    }
+
+    .ms-accepted {
+        background-color: #203253;
+        color: white;
+    }
+
+    .ms-completed {
+        background-color: #e8f3ea;
+        color: #2e7d32;
+        border: 1px solid #bfe0c5;
+    }
+
+    .ms-declined {
+        background-color: #fbe9ec;
+        color: #b00020;
+        border: 1px solid #f1c0c8;
+    }
+
+    .ms-btn {
+        background-color: #203253;
+        color: white;
+        border: 1px solid #203253;
+        border-radius: 4px;
+        font-size: 11px;
+        padding: 6px 10px;
+        margin-right: 4px;
+        cursor: pointer;
+    }
+
+        .ms-btn:hover {
+            background-color: #2d4a75;
+        }
+
+    .ms-btn-outline {
+        background-color: white;
+        color: #203253;
+    }
+
+        .ms-btn-outline:hover {
+            background-color: #f5f8fb;
+        }
+
+    .ms-empty td {
+        padding: 24px;
+        text-align: center;
+        color: #888;
+    }
+
+    /* ---- Admin Reports  ---- */
+    .ar-wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px;
+    }
+
+    .ar-title {
+        font-size: 22px;
+        font-weight: bold;
+        color: #1a1a1a;
+        margin-bottom: 16px;
+    }
+
+    .ar-stats {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    .ar-stat {
+        flex: 1;
+        min-width: 160px;
+        border: 1px solid #dde3ea;
+        border-radius: 8px;
+        padding: 14px;
+    }
+
+    .ar-stat-name {
+        font-size: 11px;
+        text-transform: uppercase;
+        color: #777;
+    }
+
+    .ar-stat-number {
+        font-size: 28px;
+        font-weight: bold;
+        color: #203253;
+        margin-top: 4px;
+    }
+
+    .ar-panels {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .ar-panel {
+        flex: 1;
+        min-width: 300px;
+        border: 1px solid #dde3ea;
+        border-radius: 8px;
+        padding: 16px;
+    }
+
+    .ar-panel-title {
+        font-size: 13px;
+        font-weight: bold;
+        color: #1a1a1a;
+        margin-bottom: 10px;
+    }
+
+    .ar-grid {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+    }
+
+        .ar-grid th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: #999;
+            border-bottom: 1px solid #dde3ea;
+            padding: 8px 6px;
+        }
+
+        .ar-grid td {
+            padding: 10px 6px;
+            border-bottom: 1px solid #eee;
+        }
+
+    .ar-empty td {
+        padding: 20px;
+        text-align: center;
+        color: #888;
+    }
+}
+
