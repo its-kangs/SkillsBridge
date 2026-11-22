@@ -3,6 +3,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.UI;
 using System.Data.SqlClient;
+using System.Configuration;
+
 
 namespace SkillBridge
 {
@@ -38,17 +40,12 @@ namespace SkillBridge
                 email = Txbemail.Text.Trim();
 
 
-                //connect to the database
                 SqlConnection con = new SqlConnection(connString);
                 SqlCommand cmd = new SqlCommand("SELECT UserID, Name, Role FROM Users WHERE Email = @Email AND PasswordHash = @Hash", con);
                 cmd.Parameters.AddWithValue("@Email", email);
                 cmd.Parameters.AddWithValue("@Hash", Txbpassword.Text);
 
-
                 con.Open();
-
-                //Associate SQL statement with command object
-                cmd = new SqlCommand(sql, con);
 
                 //Execute SQL statement
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -64,7 +61,14 @@ namespace SkillBridge
 
                     //Close database connection
                     con.Close();
-                    Response.Redirect("~/Tutor_List.aspx");
+                    if (Session["Role"].ToString() == "Tutor")
+                    {
+                        Response.Redirect("~/My_sessions.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Tutor_List.aspx");
+                    }
                 }
                 else
                 {
@@ -77,8 +81,6 @@ namespace SkillBridge
                 }
             }
         }
-
-
 
 
     }

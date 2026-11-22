@@ -496,7 +496,150 @@ textarea.auth-input {
         flex-direction: column;
         align-items: flex-start;
     }
-    /* ---- My Sessions  ---- */
+}
+
+   
+
+    /* ---- Admin Reports  ---- */
+    .ar-wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px;
+    }
+
+    .ar-title {
+        font-size: 22px;
+        font-weight: bold;
+        color: #1a1a1a;
+        margin-bottom: 16px;
+    }
+
+    .ar-stats {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    .ar-stat {
+        flex: 1;
+        min-width: 160px;
+        border: 1px solid #dde3ea;
+        border-radius: 8px;
+        padding: 14px;
+    }
+
+    .ar-stat-name {
+        font-size: 11px;
+        text-transform: uppercase;
+        color: #777;
+    }
+
+    .ar-stat-number {
+        font-size: 28px;
+        font-weight: bold;
+        color: #203253;
+        margin-top: 4px;
+    }
+
+    .ar-panels {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .ar-panel {
+        flex: 1;
+        min-width: 300px;
+        border: 1px solid #dde3ea;
+        border-radius: 8px;
+        padding: 16px;
+    }
+
+    .ar-panel-title {
+        font-size: 13px;
+        font-weight: bold;
+        color: #1a1a1a;
+        margin-bottom: 10px;
+    }
+
+    .ar-grid {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+    }
+
+        .ar-grid th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: #999;
+            border-bottom: 1px solid #dde3ea;
+            padding: 8px 6px;
+        }
+
+        .ar-grid td {
+            padding: 10px 6px;
+            border-bottom: 1px solid #eee;
+        }
+
+    .ar-empty td {
+        padding: 20px;
+        text-align: center;
+        color: #888;
+    }
+    /* ---- Header  ---- */
+    .hdr-wrap {
+        padding: 25px 32px 0 32px;
+    }
+
+    .tutor-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #dce3eb;
+        padding: 0 0 18px;
+        margin-bottom: 30px;
+    }
+
+    .brand {
+        font-size: 27px;
+        font-weight: bold;
+        color: #203253;
+    }
+
+        .brand span {
+            color: #5c9bd4;
+            font-weight: normal;
+        }
+
+    .header-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+    }
+
+        .header-links a {
+            color: #444;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+            .header-links a:hover {
+                color: #568fcb;
+            }
+
+    .profile-circle {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #d7e8f4;
+        display: inline-block;
+    }
+
+    /* ---- My Sessions ---- */
     .ms-wrap {
         max-width: 1100px;
         margin: 0 auto;
@@ -631,96 +774,14 @@ textarea.auth-input {
         text-align: center;
         color: #888;
     }
-
-    /* ---- Admin Reports  ---- */
-    .ar-wrap {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 24px;
-    }
-
-    .ar-title {
-        font-size: 22px;
-        font-weight: bold;
-        color: #1a1a1a;
-        margin-bottom: 16px;
-    }
-
-    .ar-stats {
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-    }
-
-    .ar-stat {
-        flex: 1;
-        min-width: 160px;
-        border: 1px solid #dde3ea;
-        border-radius: 8px;
-        padding: 14px;
-    }
-
-    .ar-stat-name {
-        font-size: 11px;
-        text-transform: uppercase;
-        color: #777;
-    }
-
-    .ar-stat-number {
-        font-size: 28px;
-        font-weight: bold;
+    .header-links a.active {
         color: #203253;
-        margin-top: 4px;
-    }
-
-    .ar-panels {
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-    }
-
-    .ar-panel {
-        flex: 1;
-        min-width: 300px;
-        border: 1px solid #dde3ea;
-        border-radius: 8px;
-        padding: 16px;
-    }
-
-    .ar-panel-title {
-        font-size: 13px;
         font-weight: bold;
-        color: #1a1a1a;
-        margin-bottom: 10px;
+        border-bottom: 3px solid #203253;
+        padding-bottom: 7px;
     }
 
-    .ar-grid {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 13px;
-    }
+   
 
-        .ar-grid th {
-            text-align: left;
-            font-size: 11px;
-            font-weight: normal;
-            text-transform: uppercase;
-            letter-spacing: .04em;
-            color: #999;
-            border-bottom: 1px solid #dde3ea;
-            padding: 8px 6px;
-        }
-
-        .ar-grid td {
-            padding: 10px 6px;
-            border-bottom: 1px solid #eee;
-        }
-
-    .ar-empty td {
-        padding: 20px;
-        text-align: center;
-        color: #888;
-    }
-}
-
+    
+   

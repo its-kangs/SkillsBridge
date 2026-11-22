@@ -15,6 +15,15 @@ namespace SkillBridge
     {
 
         /// <summary>
+        /// SiteHeader1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SkillBridge.SiteHeader SiteHeader1;
+
+        /// <summary>
         /// Ddlstatus control.
         /// </summary>
         /// <remarks>
@@ -31,5 +40,41 @@ namespace SkillBridge
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView Gvsessions;
+
+        /// <summary>
+        /// Btnaccept control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Btnaccept;
+
+        /// <summary>
+        /// Btndecline control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Btndecline;
+
+        /// <summary>
+        /// Btncomplete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Btncomplete;
+
+        /// <summary>
+        /// Lblmessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Lblmessage;
     }
 }

@@ -11,8 +11,17 @@ namespace SkillBridge
 {
 
 
-    public partial class AdminReports
+    public partial class Reports
     {
+
+        /// <summary>
+        /// SiteHeader1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SkillBridge.SiteHeader SiteHeader1;
 
         /// <summary>
         /// Lbltotal control.
